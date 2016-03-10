@@ -1,0 +1,96 @@
+{
+  "name": "open311_georeport_tabular",
+  "title": "Open311 GeoReport Tabular Data Package",
+  "resources": [
+    {
+      "name": "services",
+      "path": "services.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "service_code",
+            "type": "string"
+          }
+        ],
+        "primaryKey": "service_code"
+      }
+    },
+    {
+      "name": "service_definition_attributes",
+      "path": "service_definition_attributes.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "code",
+            "type": "string"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "service_code",
+            "reference": {
+              "datapackage": "",
+              "resource": "services",
+              "fields": "service_code"
+            }
+          }
+        ],
+        "primaryKey": "code"
+      }
+    },
+    {
+      "name": "service_definition_attribute_values",
+      "path": "service_definition_attribute_values.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "code_key",
+            "type": "string"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "attribute_code",
+            "reference": {
+              "datapackage": "",
+              "resource": "service_definition_attributes",
+              "fields": "code"
+            }
+          }
+        ],
+        "primaryKey": "code_key"
+      }
+    },
+    {
+      "name": "service_requests",
+      "path": "service_requests.csv",
+      "format": "csv",
+      "mediatype": "text/csv",
+      "schema": {
+        "fields": [
+          {
+            "name": "service_request_id",
+            "type": "string"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "fields": "service_code",
+            "reference": {
+              "datapackage": "",
+              "resource": "services",
+              "fields": "service_code"
+            }
+          }
+        ],
+        "primaryKey": "service_request_id"
+      }
+    }
+  ]
+}
